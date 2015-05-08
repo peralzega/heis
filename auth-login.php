@@ -13,7 +13,7 @@ if ($found > 0) {
 	$_SESSION['userid'] = $data['UserID'];
 	$_SESSION['userpass'] = $data['Pass'];
 	if ($data['Role'] == "Member") {
-		header("Location:\heis\member\home-default.php");
+		header("Location:/heis/member/home-default.php");
 	} else {
 		header("Location:success.php");
 	}
