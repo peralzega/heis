@@ -27,7 +27,7 @@ if (empty($_SESSION['userid']) AND empty($_SESSION['userpass'])) {
 </form>
 <table border="1" style="width:400px; border-collapse:collapse">
 	<caption>Jadwal Hari Ini | Lapangan Semen</caption>
-	<tr><th style="width:10%">Jam</th><th>Status</th><th>Aksi</th></tr>
+	<tr><th style="width:20%">Jam</th><th>Status</th><th>Aksi</th></tr>
 	<?php $i=10;
 		  while ($i<=22) {
 			$select1	= "SELECT * FROM transaksi WHERE PlayDate='$currDate' AND PlayStart=$i AND Field='Semen'";
@@ -38,14 +38,14 @@ if (empty($_SESSION['userid']) AND empty($_SESSION['userpass'])) {
 				$j		= $fetch['PlayEnd'];
 				$selisih= $j - $i;
 				while ($selisih>0) { ?>
-					<tr><td><?php echo $i; ?></td>
+					<tr><td><?php echo $i.".00"; ?></td>
 						<td><?php echo "Booked"; ?></td>
 						<td></td>
 					</tr>
 		<?php		$i++; $selisih--;	
 				}
 			} else { ?>
-				<tr><td><?php echo $i; ?></td>
+				<tr><td><?php echo $i.".00"; ?></td>
 					<td><?php echo "Free!"; ?></td>
 					<td><a href="booking.php?jam=<?php echo $i; ?>&date=<?php echo $currDate; ?>&field=Semen">Pesan</a></td>
 				</tr>
