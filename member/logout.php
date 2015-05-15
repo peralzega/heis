@@ -1,5 +1,7 @@
 <?php
+include "../connect.php";
 session_start();
 session_destroy();
-header("Location:..\index.php");
+
+echo "Andah telah berhasil Logout. Terimakasih atas transaksi Anda.";
 ?>
