@@ -1,14 +1,17 @@
 <?php
 session_start();
 include "../connect.php";
-$currDate		= date('Y-m-d');
+$userid		= $_SESSION['userid'];
+$select		= "SELECT * FROM pengguna WHERE UserID='$userid'";
+$query		= mysqli_query($con, $select);
+$fetch		= mysqli_fetch_array($query);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Dashboard - HEIS Futsal</title>
+<title>Profile - HEIS Futsal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -43,8 +46,8 @@ $currDate		= date('Y-m-d');
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="home-default.php"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="profile.php"><i class="icon-user"></i><span>Profile</span> </a> </li>
+        <li><a href="home-default.php"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+        <li class="active"><a href="profile.php"><i class="icon-user"></i><span>Profile</span> </a> </li>
         <li><a href="logout.php"><i class="icon-off"></i><span>Log Out</span> </a></li>
       </ul>
     </div>
@@ -58,80 +61,27 @@ $currDate		= date('Y-m-d');
     <div class="container">
       <div class="row">
         <div class="span6">
-          <div class="widget widget-nopad">
-            <div class="widget-header"> <i class="icon-time"></i>
-              <h3> Jadwal Hari Ini | Lapangan Semen</h3>
+          <div class="widget">
+            <div class="widget-header"> <i class="icon-user"></i>
+              <h3> My Profile</h3>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-              <table class="table table-striped table-bordered">
-                <thead>
-                  <tr><th style="width:20%; text-align: center"> Jam </th>
-                      <th style="text-align: center"> Status</th>
-                      <th style="width:20%" class="td-actions"> </th>
-				  </tr>
-                </thead>
-				
-                <tbody>
-				<?php $i=10;
-		  while ($i<=22) {
-			$select1	= "SELECT * FROM transaksi WHERE PlayDate='$currDate' AND PlayStart=$i AND Field='Semen'";
-			$query1		= mysqli_query($con, $select1);
-			$row1		= mysqli_num_rows($query1);
-			if ($row1 > 0) {
-				$fetch	= mysqli_fetch_array($query1);
-				$j		= $fetch['PlayEnd'];
-				$selisih= $j - $i;
-				while ($selisih>0) { ?>
-					<tr class="alert">
-						<td style="text-align: center"><?php echo $i.".00"; ?></td>
-						<td style="text-align: center"><?php echo "Booked"; ?></td>
-						<td></td>
-					</tr>
-		<?php		$i++; $selisih--;	
-				}
-			} else { ?>
-				<tr><td style="text-align: center"><?php echo $i.".00"; ?></td>
-					<td style="text-align: center"><?php echo "Free!"; ?></td>
-					<td style="text-align: center"><a href="booking.php?jam=<?php echo $i; ?>&date=<?php echo $currDate; ?>&field=Semen">
-							<button class="btn btn-success">Pesan</button>
-						</a></td>
-				</tr>
-		<?php	$i++;	
-			}
-		  }
-		?>
-                </tbody>
-              </table>
+<table>
+<tr><td>Username</td>
+    <td>: <?php echo $userid; ?></td>
+</tr>
+<tr><td>No. HP</td>
+    <td>: <?php echo $fetch['Phone']; ?></td>
+</tr>
+<tr><td><a href="change-pass.php">Ganti password</a></td></tr>
+</table>              
             </div>
           </div>
           
         </div>
         <!-- /span6 -->
-        <div class="span4">
-          <div class="widget">
-            <div class="widget-header"> <i class="icon-calendar"></i>
-              <h3>Pilih Jadwal</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <form method="POST" action="home.php">
-				<input type="date" name="date" />
-				<select name="field">
-					<option selected="selected" value="Semen">Semen</option>
-					<option value="Sintetis">Sintetis</option>
-					<option value="Vinyl">Vinyl</option>
-				</select> <br/>
-				<input style="width:220px" class="btn btn-primary" type="submit" value="Ok" /> 
-			  </form>
-            </div>
-            <!-- /widget-content --> 
-          </div>
-          <!-- /widget -->
-          
-          
-          
-        </div>
+        
         <!-- /span6 --> 
       </div>
       <!-- /row --> 
