@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   
- <head>
+<head>
     <meta charset="utf-8">
-    <title>Signup - Bootstrap Admin Template</title>
+    <title>Login - HEIS Futsal</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"> 
@@ -39,16 +39,10 @@
 			
 			<div class="nav-collapse">
 				<ul class="nav pull-right">
+					
 					<li class="">						
-						<a href="index.php" class="">
-							Already have an account? Login now
-						</a>
-						
-					</li>
-					<li class="">						
-						<a href="index.php" class="">
-							<i class="icon-chevron-left"></i>
-							Back to Homepage
+						<a href="register.php" class="">
+							Don't have an account?
 						</a>
 						
 					</li>
@@ -64,57 +58,43 @@
 
 
 
-<div class="account-container register">
+<div class="account-container">
 	
 	<div class="content clearfix">
 		
-		<form action="do-register.php" method="POST">
+		<form method="POST" action="auth-login.php">
 		
-			<h1>Signup for Free Account</h1>			
+			<h1>Login</h1>		
 			
 			<div class="login-fields">
-				
-				<p>Create your free account:</p>
-				
+				<div class="alert">
+					<strong>Warning!</strong> Anda belum  terdaftar. <a href="register.php"><u>Buat akun</u></a>
+				</div>
 				<div class="field">
-					<label for="username">Username:</label>
-					<input required type="text" id="username" name="userid" value="" placeholder="Username" class="login" />
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="hp">No. HP:</label>	
-					<input required type="tel" id="lastname" name="hp" value="" placeholder="No. HP" class="login" />
+					<label for="username">Username</label>
+					<input required type="text" id="username" name="username" value="" placeholder="Username" class="login username-field" />
 				</div> <!-- /field -->
 				
 				<div class="field">
 					<label for="password">Password:</label>
-					<input required type="password" id="password" name="pass1" value="" placeholder="Password" class="login"/>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="confirm_password">Confirm Password:</label>
-					<input required type="password" id="confirm_password" name="pass2" value="" placeholder="Confirm Password" class="login"/>
-				</div> <!-- /field -->
+					<input required type="password" id="password" name="password" value="" placeholder="Password" class="login password-field"/>
+				</div> <!-- /password -->
 				
 			</div> <!-- /login-fields -->
 			
 			<div class="login-actions">
-									
-				<input type="submit" value="Register" class="button btn btn-primary btn-large">
+				
+				<input type="submit" class="button btn btn-success btn-large" value="Sign In" />
 				
 			</div> <!-- .actions -->
+			
+			
 			
 		</form>
 		
 	</div> <!-- /content -->
 	
 </div> <!-- /account-container -->
-
-
-<!-- Text Under Box -->
-<div class="login-extra">
-	Already have an account? <a href="index.php">Login to your account</a>
-</div> <!-- /login-extra -->
 
 
 <script src="js/jquery-1.7.2.min.js"></script>
@@ -124,4 +104,4 @@
 
 </body>
 
- </html>
+</html>

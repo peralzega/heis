@@ -4,19 +4,16 @@ $userid		= $_POST['userid'];
 $hp			= $_POST['hp'];
 $pass1		= $_POST['pass1'];
 $pass2		= $_POST['pass2'];
+$select		= "SELECT * FROM pengguna WHERE UserID='$userid'";
+$query		= mysqli_query($con, $select);
+$row		= mysqli_num_rows($query);
 
-if (empty($userid) || empty($hp) || empty($pass1) || empty($pass2)) {
-	echo "Form ada yang kosong. Silahkan ulangi.";
+if ($row > 0) {
+	header("Location: register-error.php");
+} else if ($pass1 !== $pass2) {
+	header("Location: register-error2.php");
 } else {
-	$select		= "SELECT * FROM pengguna WHERE UserID='$userid'";
-	$query		= mysqli_query($con, $select);
-	$row		= mysqli_num_rows($query);
-	if ($row > 0) {
-		echo "Username tidak tersedia. Silahkan ulangi.";
-	} else if ($pass1 !== $pass2) {
-		echo "Password salah. Silahkan ulangi.";
-	} else {
-		$insert	= "INSERT INTO pengguna(UserID,
+	$insert	= "INSERT INTO pengguna(UserID,
 		                                Phone,
 										Pass,
 										Role)
@@ -24,15 +21,14 @@ if (empty($userid) || empty($hp) || empty($pass1) || empty($pass2)) {
 								        '$hp',
 										'$pass1',
 										'Member')";
-		$query	= mysqli_query($con, $insert);
+	$query	= mysqli_query($con, $insert);
 		
-		if ($query == TRUE) {
-			session_start();
-			$_SESSION['userid'] = $userid;
-			$_SESSION['userpass'] = $pass1;
-			header("Location:/heis/member/home-default.php");
-		} else {
-		}
+	if ($query == TRUE) {
+		session_start();
+		$_SESSION['userid'] = $userid;
+		$_SESSION['userpass'] = $pass1;
+		header("Location:/heis/member/home-default.php");
+	} else {
 	}
 }
 ?>

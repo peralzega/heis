@@ -73,9 +73,9 @@
 			<h1>Signup for Free Account</h1>			
 			
 			<div class="login-fields">
-				
-				<p>Create your free account:</p>
-				
+			  <div class="alert">
+				<strong>Warning!</strong> Username telah terdaftar
+			  </div>
 				<div class="field">
 					<label for="username">Username:</label>
 					<input required type="text" id="username" name="userid" value="" placeholder="Username" class="login" />
