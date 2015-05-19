@@ -36,6 +36,9 @@ $field 	= $_POST['field'];
                     class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">HEIS Futsal </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
+			<li class="">						
+				<a href="profile.php" class="">Selamat datang, <?php echo $_SESSION['userid']; ?></a>
+			</li>
         </ul>
       </div>
       <!--/.nav-collapse --> 
@@ -51,6 +54,7 @@ $field 	= $_POST['field'];
       <ul class="mainnav">
         <li class="active"><a href="home-default.php"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
         <li><a href="profile.php"><i class="icon-user"></i><span>Profile</span> </a> </li>
+		<li><a href="transaction.php"><i class="icon-book"></i><span>Transaction</span> </a> </li>
         <li><a href="logout.php"><i class="icon-off"></i><span>Log Out</span> </a></li>
       </ul>
     </div>

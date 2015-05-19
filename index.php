@@ -64,7 +64,7 @@
 		
 		<form method="POST" action="auth-login.php">
 		
-			<h1>Member Login</h1>		
+			<h1>Login</h1>		
 			
 			<div class="login-fields">
 				
@@ -72,12 +72,12 @@
 				
 				<div class="field">
 					<label for="username">Username</label>
-					<input type="text" id="username" name="username" value="" placeholder="Username" class="login username-field" />
+					<input required type="text" id="username" name="username" value="" placeholder="Username" class="login username-field" />
 				</div> <!-- /field -->
 				
 				<div class="field">
 					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" class="login password-field"/>
+					<input required type="password" id="password" name="password" value="" placeholder="Password" class="login password-field"/>
 				</div> <!-- /password -->
 				
 			</div> <!-- /login-fields -->

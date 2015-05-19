@@ -1,17 +1,14 @@
 <?php
-session_start();
 include "../connect.php";
-$userid		= $_SESSION['userid'];
-$select		= "SELECT * FROM pengguna WHERE UserID='$userid'";
-$query		= mysqli_query($con, $select);
-$fetch		= mysqli_fetch_array($query);
+session_start();
+$user		= $_SESSION['userid'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Profile - HEIS Futsal</title>
+<title>Transaction - HEIS Futsal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -50,8 +47,8 @@ $fetch		= mysqli_fetch_array($query);
     <div class="container">
       <ul class="mainnav">
         <li><a href="home-default.php"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li class="active"><a href="profile.php"><i class="icon-user"></i><span>Profile</span> </a> </li>
-		<li><a href="transaction.php"><i class="icon-book"></i><span>Transaction</span> </a> </li>
+        <li><a href="profile.php"><i class="icon-user"></i><span>Profile</span> </a> </li>
+		<li class="active"><a href="transaction.php"><i class="icon-book"></i><span>Transaction</span> </a> </li>
         <li><a href="logout.php"><i class="icon-off"></i><span>Log Out</span> </a></li>
       </ul>
     </div>
@@ -64,29 +61,52 @@ $fetch		= mysqli_fetch_array($query);
   <div class="main-inner">
     <div class="container">
       <div class="row">
-        <div class="span6">
-          <div class="widget">
-            <div class="widget-header"> <i class="icon-user"></i>
-              <h3> My Profile</h3>
+        <div class="span10">
+          <div class="widget widget-nopad">
+            <div class="widget-header"> <i class="icon-list"></i>
+              <h3> Riwayat Transaksi</h3>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-<table>
-<tr><td>Username</td>
-    <td>: <?php echo $userid; ?></td>
-</tr>
-<tr><td>No. HP</td>
-    <td>: <?php echo $fetch['Phone']; ?></td>
-</tr>
-<tr><td><a href="change-pass.php">Ganti password</a></td></tr>
-</table>              
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr><th style="text-align: center"> Tanggal Order </th>
+                      <th style="text-align: center"> Tanggal Main </th>
+					  <th style="text-align: center"> Waktu </th>
+					  <th style="text-align: center"> Lapangan </th>
+					  <th style="text-align: center"> Biaya </th>
+					  <th style="text-align: center"> Status </th>
+                      <th style="" class="td-actions"> </th>
+				  </tr>
+                </thead>
+				
+                <tbody>
+				<?php
+				$select = "SELECT * FROM transaksi WHERE User_ID='$user' ORDER BY OrderDate DESC";
+				$query	= mysqli_query($con, $select);
+				while ($fetch	= mysqli_fetch_array($query)) { ?>
+				<tr><td><?php echo $fetch['OrderDate'];?></td>
+				    <td><?php echo $fetch['PlayDate'];?></td>
+					<td><?php echo $fetch['PlayStart'].".00-".$fetch['PlayEnd'].".00";?></td>
+					<td><?php echo $fetch['Field'];?></td>
+					<td><?php echo "Rp ".$fetch['Charge'].",-";?></td>
+					<td><?php if ($fetch['Stats'] == 1) {
+								echo "Lunas";
+					          } else {
+								echo "Belum Lunas";
+							  }
+						?>
+					</td>
+				</tr>
+		<?php	} ?>
+                </tbody>
+              </table>
             </div>
           </div>
           
         </div>
         <!-- /span6 -->
         
-        <!-- /span6 --> 
       </div>
       <!-- /row --> 
     </div>
