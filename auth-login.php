@@ -9,15 +9,17 @@ $rows			= mysqli_num_rows($query);
 $fetch			= mysqli_fetch_array($query);
 
 if ($rows > 0) {
-	if ($password == $_fetch['Pass']) {
+	if ($password == $fetch['Pass']) {
 		session_start();
-		$_SESSION['userid'] = $data['UserID'];
-		$_SESSION['userpass'] = $data['Pass'];
+		$_SESSION['userid'] = $fetch['UserID'];
+		$_SESSION['userpass'] = $fetch['Pass'];
 		
-		if ($data['Role'] == "Member") {
+		if ($fetch['Role'] == "Member") {
 			header("Location:/heis/member/home-default.php");
+		} else if ($fetch['Role'] == "Admin") {
+			header("Location:/heis/admin/home.php");
 		} else {
-			header("Location:success.php");
+			header("Location:/heis/superadmin/home.php");
 		}
 	} else {
 		header("Location:login-error.php");
